@@ -1136,7 +1136,7 @@ flx = [fekm_na, fekm_cl, fekm_k, fekm_gluc, fikm_na, fikm_cl, fikm_k, fikm_gluc,
       jnhe3_na + na_mi_nagluc + na_mi_nah2po4, gluc_mi_nagluc, na_nak, hco3_clhco3, Cellular_water_fluxes,
       clvl_imp]
 if Figure_9_10:
-    from PCT_GLOB_new import *
+    from W_PCT_E_Glob import *
 
     t = 0
     guess = [var[t] for var in vars]
@@ -1263,7 +1263,7 @@ if Figure_9_10:
     of.write(pickled_list)
     of.close()
 if Figure_5:
-    from PCT_GLOB_new import *
+    from W_PCT_E_Glob import *
     t = 0
     guess = [var[t] for var in vars]
     NaCl = 1
@@ -1374,7 +1374,7 @@ if Figure_5:
     ax4.set_xlim(-5, tf)
     plt.show()
 if Figure_4a:
-    from PCT_GLOB_new import *
+    from W_PCT_E_Glob import *
     mylist_na = [0.1 for i in range(T)]
     mylist_cl = [0.1 for i in range(T)]
     mylist_hco3 = [0.1 for i in range(T)]
@@ -1418,7 +1418,7 @@ if Figure_4a:
     x3 = ax3.plot(mylist_hco3[30:-2], fekm_cl[30:-2], 'blue')
     ax3.legend([x1[0], x2[0], x3[0]],['Total Epithelial', 'Cellular', 'Junctional'])
 if Figure_4b:
-    from PCT_GLOB_new import *
+    from W_PCT_E_Glob import *
     mylist_hco2 = [0.1 for i in range(T)]
     cm_hco2_0 = 0.004
     cm_hco2_f = 0.05
@@ -1462,7 +1462,7 @@ if Figure_4b:
     of.write(pickled_list)
     of.close()
 if Figure_4c:
-    from PCT_GLOB_new import *
+    from W_PCT_E_Glob import *
     t = 0
     guess = [var[t] for var in vars]
     cm_hco3 = 0.004
@@ -1504,7 +1504,7 @@ if Figure_4c:
     ax1.legend([x1[0], x2[0], x3[0]],['Total Epithelial', 'Cellular', 'Junctional'])
 if Figure_6_7_8:
 
-    from PCT_GLOB_new import *
+    from W_PCT_E_Glob import *
     t = 0
     guess = [var[t] for var in vars]
     while True:

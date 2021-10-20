@@ -16,9 +16,9 @@ The differential equations will be updated by the buffer pairs, PH equilibrium, 
 .. figure:: BlockDiagram.PNG
    :width: 85%
    :align: center
-   :alt: Schematics of the model
+   :alt: Model schematic
 
- A block diagram of the W-PCT-E model.
+A block diagram of the W-PCT-E model.
 
 
 Model status

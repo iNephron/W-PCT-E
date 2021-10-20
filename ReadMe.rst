@@ -1,33 +1,7 @@
-About this model
-====================
-
 Here we provide the implementation described in: A modular and reusable model of epithelial transport in the proximal convoluted tubule.
 
-Primary references:
-
-:Weinstein, A M (1986):  *An equation for flow in the renal proximal tubule*
-:Weinstein, A M (1992):  *Chloride transport in a mathematical model of the rat proximal tubule*
-    <https://doi.org/10.1152/ajprenal.1992.263.5.F784>
-:Weinstein, A M (1995):  *A kinetically defined Na+/H+ antiporter within a mathematical model of the rat proximal tubule*
-    https://doi.org/10.1085/jgp.105.5.617
-:Weinstein, A M., et al. (2007):  *Flow-dependent transport in a mathematical model of rat proximal tubule*
-    https://doi.org/10.1152/ajprenal.00392.2006
-:Weinstein, A M., et al.(2011):  *Potassium deprivation: a systems approach*
-    https://doi.org/10.1152/ajprenal.00430.2011
-
-Model status
-=============
-The current W-PCT-E model implementation in Python runs in Python 3.9.0 [MSC v.1927 64 bit (AMD64)] on win32.
-The W-PCT-E model have been validated through the following experiments:
-
-* The W-PCT-E model reproducibility was tested through replicating some simulation experiments reported in 'Weinstein, A M (1992)' and 'Weinstein, A M (2007)'.
-
-* The W-PCT-E model flexibility and reusability was tested by reproducing a simple model of Na+ transport in the mammalian urinary bladder to study the salt sensitivity , see 'General method for the derivation and numerical solution of epithelial transport models (Latta, Richard., et al.(1984)).
-
-* Structural analysis of the W-PCT-E model validated the application of the model to the wide range of physiological perturbations.
-
 Model overview
-===================
+==============
 In this project, we review the collection of proximal convoluted tubule epithelial transport models from Weinstein et al.;
 we derive a consistent, reproducible, and reusable PCT epithelial transport model.  The comprehensive PCT epithelial model
 consists of cellular and lateral intercellular compartments located between luminal and peritubular solutions.
@@ -45,6 +19,18 @@ The differential equations will be updated by the buffer pairs, PH equilibrium, 
    :alt: Schematics of the model
 
  A block diagram of the W-PCT-E model.
+
+
+Model status
+=============
+The current W-PCT-E model implementation in Python runs in Python 3.9.0 [MSC v.1927 64 bit (AMD64)] on win32.
+The W-PCT-E model has been validated through the following experiments:
+
+* The W-PCT-E model reproducibility was tested through replicating some simulation experiments reported in [Weinstein1992]_ and [Weinstein2007]_.
+
+* The W-PCT-E model flexibility and reusability was tested by reproducing a simple model of Na+ transport in the mammalian urinary bladder to study the salt sensitivity , see 'General method for the derivation and numerical solution of epithelial transport models [Latta1984]_.
+
+* Structural analysis of the W-PCT-E model validated the application of the model to the wide range of physiological perturbations.
 
 Modular description
 ===================
@@ -141,3 +127,14 @@ Simulation settings
 -------------------
 The total time for simulation is 2000s and the time step sets to 0.1s.
 The simulation needs to run long enough to reach the steady-states.
+
+References
+===========
+
+.. [Latta1984] General method for the derivation and numerical solution of epithelial transport models, https://doi.org/10.1007/BF01870733
+.. [Weinstein1986] An equation for flow in the renal proximal tubule, https://doi.org/10.1007/BF02460061
+.. [Weinstein1992] Chloride transport in a mathematical model of the rat proximal tubule, https://doi.org/10.1152/ajprenal.1992.263.5.F784
+.. [Weinstein1995] A kinetically defined Na+/H+ antiporter within a mathematical model of the rat proximal tubule, https://doi.org/10.1085/jgp.105.5.617
+.. [Weinstein2007] Flow-dependent transport in a mathematical model of rat proximal tubule, https://doi.org/10.1152/ajprenal.00392.2006
+.. [Weinstein2011] Potassium deprivation: a systems approach, https://doi.org/10.1152/ajprenal.00430.2011
+

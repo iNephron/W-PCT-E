@@ -1,26 +1,30 @@
 About this model
 ====================
-:Main Sources:
-: `Weinstein, A M (1986)`:  "An equation for flow in the renal proximal tubule."
-: `Weinstein, A M (1992)`:  "Chloride transport in a mathematical model of the rat proximal tubule".
-:DOI: https://doi.org/10.1152/ajprenal.1992.263.5.F784
-: `Weinstein, A M (1995)`:  "A kinetically defined Na+/H+ antiporter within a mathematical model of the rat proximal tubule."
-:DOI: https://doi.org/10.1085/jgp.105.5.617
-: `Weinstein, A M., et al.(2007)`:  "Flow-dependent transport in a mathematical model of rat proximal tubule."
-:DOI: https://doi.org/10.1152/ajprenal.00392.2006
-:`Weinstein, A M., et al.(2011)`:  "Potassium deprivation: a systems approach.""
-:DOI: https://doi.org/10.1152/ajprenal.00430.2011
+
+Here we provide the implementation described in: A modular and reusable model of epithelial transport in the proximal convoluted tubule.
+
+Primary references:
+
+:Weinstein, A M (1986):  *An equation for flow in the renal proximal tubule*
+:Weinstein, A M (1992):  *Chloride transport in a mathematical model of the rat proximal tubule*
+    <https://doi.org/10.1152/ajprenal.1992.263.5.F784>
+:Weinstein, A M (1995):  *A kinetically defined Na+/H+ antiporter within a mathematical model of the rat proximal tubule*
+    https://doi.org/10.1085/jgp.105.5.617
+:Weinstein, A M., et al. (2007):  *Flow-dependent transport in a mathematical model of rat proximal tubule*
+    https://doi.org/10.1152/ajprenal.00392.2006
+:Weinstein, A M., et al.(2011):  *Potassium deprivation: a systems approach*
+    https://doi.org/10.1152/ajprenal.00430.2011
 
 Model status
 =============
 The current W-PCT-E model implementation in Python runs in Python 3.9.0 [MSC v.1927 64 bit (AMD64)] on win32.
 The W-PCT-E model have been validated through the following experiments:
 
-: The W-PCT-E model reproducibility was tested through replicating some simulation experiments reported in 'Weinstein, A M (1992)' and 'Weinstein, A M (2007)'.
+* The W-PCT-E model reproducibility was tested through replicating some simulation experiments reported in 'Weinstein, A M (1992)' and 'Weinstein, A M (2007)'.
 
-: The W-PCT-E model flexibility and reusability was tested by reproducing a simple model of Na+ transport in the mammalian urinary bladder to study the salt sensitivity , see 'General method for the derivation and numerical solution of epithelial transport models (Latta, Richard., et al.(1984)).
+* The W-PCT-E model flexibility and reusability was tested by reproducing a simple model of Na+ transport in the mammalian urinary bladder to study the salt sensitivity , see 'General method for the derivation and numerical solution of epithelial transport models (Latta, Richard., et al.(1984)).
 
-: Structural analysis of the W-PCT-E model validated the application of the model to the wide range of physiological perturbations.
+* Structural analysis of the W-PCT-E model validated the application of the model to the wide range of physiological perturbations.
 
 Model overview
 ===================
@@ -50,11 +54,11 @@ The main Python components are:
 
 Components define convective solute fluxes:
 -------------------------------------------
-: To define the convective solute fluxes (Eq:37), the logarithmic mean membrane solute concentration were used (Eq:38). See Python modules: def csf() and def lmmsc().
+To define the convective solute fluxes (Eq:37), the logarithmic mean membrane solute concentration were used (Eq:38). See Python modules: def csf() and def lmmsc().
 
 Components define passive solute fluxes:
 ----------------------------------------
-: Passive solute fluxes across all membranes are assumed to occur by electrodiffusion and defined through Goldman equations, see Eqs:(39-41), see Python module:  def goldman().
+Passive solute fluxes across all membranes are assumed to occur by electrodiffusion and defined through Goldman equations, see Eqs:(39-41), see Python module:  def goldman().
 
 Components define coupled solute transporters:
 ----------------------------------------------
@@ -69,17 +73,16 @@ Proximal tubule cells showing coupled transport pathways and some ion channels
 within the luminal and peritubular cell membranes.
 
 
-: K-Cl simple cotransporter with [1:1] stoichiometry, located on Peritubular Membrane which
- includes both Cell-Lateral Membrane (ie)/Cell-Basal (is) Membrane, see Eq:(42) and Python module:def k-cl().
+K-Cl simple cotransporter with [1:1] stoichiometry, located on Peritubular Membrane which
+includes both Cell-Lateral Membrane (ie)/Cell-Basal (is) Membrane, see Eq:(42) and Python module: def k-cl().
 
-: Na-Glucose simple cotransporter with [1:1] stoichiometry, located on Apical  Membrane, see Eq:(43) and Python module: def sglt_mi().
+Na-Glucose simple cotransporter with [1:1] stoichiometry, located on Apical  Membrane, see Eq:(43) and Python module: def sglt_mi().
 
-: Na-H2PO4 simple cotransporter with [1:1] stoichiometry, located on  Apical  Membrane, see Eq:(44) and Python module: def nah2po4_mi().
+Na-H2PO4 simple cotransporter with [1:1] stoichiometry, located on  Apical  Membrane, see Eq:(44) and Python module: def nah2po4_mi().
 
+Na/H simple exchanger with [1:-1] stoichiometry, located on Apical Membrane, see Eq:(45) and Python module: def nah().
 
-: Na/H simple exchanger with [1:-1] stoichiometry, located on Apical Membrane, see Eq:(45) and Python module: def nah().
-
-: Na/NH4 simple exchanger with [1:-1] stoichiometry, located on Apical Membrane, see Eq:(46) and Python module: def nanh4().
+Na/NH4 simple exchanger with [1:-1] stoichiometry, located on Apical Membrane, see Eq:(46) and Python module: def nanh4().
 
 : Cl/HCO3 simple exchanger with [1:-1] stoichiometry, located on Apical  Membrane, see Eq:(47) and Python module: def clhco2_mi().
 

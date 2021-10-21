@@ -8,6 +8,8 @@ This repository contains the following Python scripts:
 
 * To reproduce figures from the article use the Python code: ``Figures_W_PCT_E.py``.
 
+To ensure your Python environment has the required Python modules used in these scripts, but sure to perform something similar to ``pip install -r requirements.txt`` as appropriate for your platform and Python environment.
+
 The various findings reported in the article can be reproduced using these scripts in the following manner.
 
 1. To reproduce the published observations and predictions of [Weinstein2007]_, reader needs to tune the model parameters accordingly by defining ``if2007 = 1`` in ``W-PCT-E-Glob.py``.

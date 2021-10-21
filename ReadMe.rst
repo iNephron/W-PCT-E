@@ -1,5 +1,28 @@
 Here we provide the implementation described in: A modular and reusable model of epithelial transport in the proximal convoluted tubule.
 
+This repository contains the following Python scripts:
+
+* The W-PCT-E model simulation can be found in the Python code: ``W_PCT_E_Sim_Fig.py``.
+
+* The W-PCT-E model parameters can be found in ``W-PCT-E-Glob.py``.
+
+* To reproduce figures from the article use the Python code: ``Figures_W_PCT_E.py``.
+
+The various findings reported in the article can be reproduced using these scripts in the following manner.
+
+1. To reproduce the published observations and predictions of [Weinstein2007]_, reader needs to tune the model parameters accordingly by defining ``if2007 = 1`` in ``W-PCT-E-Glob.py``.
+
+2. To reproduce the result from [Weinstein1992]_, the model parameters and boundary conditions should be tuned by defining  ``Figure_4a = 1``, ``Figure_4b = 1`` and ``Figure_4c = 1``.
+
+3. To reproduce the result from [Latta1984]_, we tune the boundary conditions by defining ``Figure_5 = 1``.
+
+4. To reproduce the results related to structural analysis and to investigate the effect of different transporters in the W-PCT-E, we define ``Figure_6_7_8 = 1``.
+
+5. To demonstrate the comprehensiveness and flexibility of the W-PCT-E model, we explore various physiological phenomena using our model, to reproduce those results define ``Figure_9_10=1``.
+
+In all cases, the total time for simulation is 2000s and the time step sets to 0.1s.
+The simulation needs to run long enough to reach the steady-states.
+
 Model overview
 ==============
 In this project, we review the collection of proximal convoluted tubule epithelial transport models from Weinstein et al.;
@@ -99,33 +122,6 @@ Components define the W-PCT-E mass conservations:
 The mass conservation equations define the change of the concentration of the species in the intracellular solution as the transport of solute i into and out of the cell through the apical and basolateral membrane, see Eqs:(6-13) and Python module: ``def eQs()``.
 
 Each of these modules is itself a Python model, which enable the researchers to reuse the these components in their studies.
-
-Model workspace:
-================
-* The W-PCT-E model simulation can be found in the Python code: ``W_PCT_E_Sim_Fig.py``.
-
-* The W-PCT-E model parameters can be found in ``W-PCT-E-Glob.py``.
-
-* To reproduce figures from the article use the Python code: ``Figures_W_PCT_E.py``.
-
-Experiments:
-------------
-This workspace has 6 sets of experiments and corresponding simulation results:
-
-1. To reproduce the published observations and predictions of [Weinstein2007]_, reader needs to tune the model parameters accordingly by defining ``if2007 = 1`` in ``W-PCT-E-Glob.py``.
-
-2. To reproduce the result from [Weinstein1992]_, the model parameters and boundary conditions should be tuned by defining  ``Figure_4a = 1``, ``Figure_4b = 1`` and ``Figure_4c = 1``.
-
-3. To reproduce the result from [Latta1984]_, we tune the boundary conditions by defining ``Figure_5 = 1``.
-
-4. To reproduce the results related to structural analysis and to investigate the effect of different transporters in the W-PCT-E, we define ``Figure_6_7_8 = 1``.
-
-5. To demonstrate the comprehensiveness and flexibility of the W-PCT-E model, we explore various physiological phenomena using our model, to reproduce those results define ``Figure_9_10=1``.
-
-Simulation settings
--------------------
-The total time for simulation is 2000s and the time step sets to 0.1s.
-The simulation needs to run long enough to reach the steady-states.
 
 References
 ===========

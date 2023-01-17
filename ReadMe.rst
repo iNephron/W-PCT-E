@@ -95,11 +95,11 @@ Na/H simple exchanger with [1:-1] stoichiometry, located on Apical Membrane, see
 
 Na/NH4 simple exchanger with [1:-1] stoichiometry, located on Apical Membrane, see Eq:(46) and Python module: ``def nanh4()``.
 
-Cl/HCO3 simple exchanger with [1:-1] stoichiometry, located on Apical  Membrane, see Eq:(47) and Python module: ``def clhco2_mi()``.
+Cl/HCO2 simple exchanger with [1:-1] stoichiometry, located on Apical  Membrane, see Eq:(47) and Python module: ``def clhco2_mi()``.
 
 Cl/HCO3 simple exchanger with [1:-1] stoichiometry, located on Apical  Membrane, see Eq:(48) and Python module: ``def clhco3_mi()``.
 
-Na-3HCO3 complex transporters at the peritubular membrane with [1 : 3] stoichiometry, see Eq:(50) and Python module: ``def na_hco3()``.
+Na-3HCO3 complex transporters at the peritubular membrane with [1 : 3] stoichiometry, see Eq:(49) and Python module: ``def na_hco3()``.
 
 Na/Cl-2HCO3 complex transporters at the peritubular membrane with [1 : -1 : 2] stoichiometry, see Eq:(50) and Python module: ``def na_cl_hco3()``.
 

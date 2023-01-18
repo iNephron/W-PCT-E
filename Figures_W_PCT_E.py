@@ -11,12 +11,13 @@ import pickle
 
 Figure_4 = 0
 Figure_5 = 0
-Figure_7 = 0
+
 Figure_9_10 = 0
 # To produce Figures 6A, 6B, 8A and 8B, we use Altair which is an open-source python library.
 # We can create just one figure at the time (via Altair); each time we call altair, it opens a new windows browser.
 Figure_6A = 0
 Figure_6B = 0
+Figure_7 = 1
 Figure_8A = 0
 Figure_8B = 1
 
@@ -27,7 +28,7 @@ if Figure_4:
     f.close()
     fig4 = plt.figure(constrained_layout=False,  figsize=(10, 10))
     spec2 = gridspec.GridSpec(ncols=1, nrows=3, figure=fig4)
-    ax1 = fig4.add_subplot(spec2 [ 0, 0 ])
+    ax1 = fig4.add_subplot(spec2 [0, 0])
     ax1.set_title('Figure_4', color='black')
     # ax1.set_ylim([ -20, 45])
     x1 = ax1.plot(loaded_list_4a['mylist_hco3'][52:-2], loaded_list_4a['flux_cl'][52:-2], 'black')
@@ -103,8 +104,11 @@ if Figure_7:
     fig = plt.figure(num=None, figsize=(12, 12))
     x1=['ES', 'IE', 'IS', 'ME', 'MI','EPTL']
     ax1 = fig.add_subplot(3, 3, 1)
-    ax1.bar(x1, np.array(my_loaded_list0['flx_na_mem_default']), color=[ 'black', '#b66dff', '#24ff24', '#007282', '#2B9F78', '#920000'])
-    # ax1.set_ylim(-0.2,7.5)
+    ax1.bar(x1, np.array(my_loaded_list0['flx_na_mem_default'])*1e6, color=[ 'black', '#b66dff', '#24ff24', '#007282', '#2B9F78', '#920000'])
+    ax1.set_ylim(-0.2,8)
+    ax1.set_ylabel('Control Version', color='black')
+    ax1.set_ylabel('Control Version', color='black')
+    ax1.set_title('(a) Membrane Total Fluxes', color='black', fontsize=12)
     plt.setp(plt.gca(), xticklabels=[])
 
     # Defines values for the second plot
@@ -112,58 +116,61 @@ if Figure_7:
     print(type(my_loaded_list0['epithelial_flx_variation_default']),my_loaded_list0['epithelial_flx_variation_default'])
     ax2 = fig.add_subplot(3, 3, 2)
 
-    Epithelial = my_loaded_list0['epithelial_flx_variation_default']
+    Epithelial = [x * 1e6 for x in my_loaded_list0['epithelial_flx_variation_default']]
     ax2.bar(x2, Epithelial, color=['black', '#b66dff','#2B9F78'])
-    # ax2.set_ylim(-0.2,8.4)
+    ax2.set_ylim(-0.2, 8)
+    ax2.set_title('(b) Epithelial Flux Type, ME+MI', color='black', fontsize=12)
     plt.setp(plt.gca(), xticklabels=[])
     x3 = ['NHE3', 'SGLT','NaH2PO4']
     ax3 = fig.add_subplot(3, 3, 3)
-    ax3.bar(x3, my_loaded_list0['epithelial_flx_elct_chmcl_default'], color=['#db6d00', '#b66dff', '#2B9F78'])
-    # ax3.set_ylim(-0.2,3.8)
+    ax3.bar(x3, [x * 1e6 for x in my_loaded_list0['epithelial_flx_elct_chmcl_default']], color=['#db6d00', '#b66dff', '#2B9F78'])
+    ax3.set_ylim(-0.2, 4)
+    ax3.set_title('(c) Electrochemical Flux', color='black', fontsize=12)
     plt.setp(plt.gca(), xticklabels=[])
     ax4 = fig.add_subplot(3, 3, 4)
-    labels = ['Interspace Basement', 'Cell Lateral', 'Basal Cell', 'Tight Junction', 'Cell Apical', 'Epithelial']
+    labels = ['ES', 'IE', 'IS', 'ME', 'IM', 'ME+MI']
     colors = ['black', '#b66dff', '#24ff24', '#007282', '#2B9F78', '#920000']
-    for tmpX, tmpY, color, label in zip(x1, my_loaded_list0['flx_na_mem_nak'], colors, labels):
+    for tmpX, tmpY, color, label in zip(x1, [x * 1e6 for x in my_loaded_list0['flx_na_mem_nak']], colors, labels):
         ax4.bar(tmpX, tmpY, color=color, label=label)
-    # ax4.set_ylim(-0.2, 7.5)
+    ax4.set_ylim(-0.2, 8)
     plt.setp(plt.gca(), xticklabels=[])
     ax4.legend(shadow=False, fancybox=False, frameon=False)
+    ax4.set_ylabel('Membrane Fluxes [$\\regular_{nmol.{s}^{-1}. Cm^{-2}}$] \n Nak =0 ', fontsize=12)
     ax5 = fig.add_subplot(3, 3, 5)
     labels = ['Covective ', 'Passive', 'Electochemical']
     colors = ['black', '#b66dff', '#2B9F78']
-    for tmpX, tmpY, color, label in zip(x2, my_loaded_list0['epithelial_flx_variation_nak'], colors, labels):
+    for tmpX, tmpY, color, label in zip(x2, [x * 1e6 for x in my_loaded_list0['epithelial_flx_variation_nak']], colors, labels):
         ax5.bar(tmpX, tmpY, color=color, label=label)
     plt.setp(plt.gca(), xticklabels=[])
-    # ax5.set_ylim(-0.2, 8.4)
+    ax5.set_ylim(-0.2, 8)
     ax5.legend(shadow=False, fancybox=False, frameon=False)
     ax6=fig.add_subplot(3, 3, 6)
     colors=['#db6d00', '#b66dff','#2B9F78']
     labels=['NHE3','SGLT','NaH2PO4']
-    for tmpX, tmpY, color, label in zip(x3, my_loaded_list0['epithelial_flx_elct_chmcl_nak'], colors, labels):
+    for tmpX, tmpY, color, label in zip(x3, [x * 1e6 for x in my_loaded_list0['epithelial_flx_elct_chmcl_nak']], colors, labels):
         ax6.bar(tmpX, tmpY, color=color, label=label)
     plt.setp(plt.gca(), xticklabels=[])
-    # ax6.set_ylim(-0.1,3.8)
+    ax6.set_ylim(-0.2, 4)
     ax6.legend(shadow=False, fancybox=False, frameon=False)
-    ax7=fig.add_subplot(3, 3, 7)
-    ax7.bar(x1, my_loaded_list0['flx_na_mem_nhe3'], color=['black', '#b66dff','#24ff24', '#007282','#2B9F78','#920000'])
-    ax7.set_xlabel('Membrane Flux_Na [mmol/s.cm2]', color='black')
-    # ax7.set_ylim(-0.2,7.5)
+    ax7 = fig.add_subplot(3, 3, 7)
+    ax7.bar(x1, [x * 1e6 for x in my_loaded_list0['flx_na_mem_nhe3']], color=['black', '#b66dff','#24ff24', '#007282','#2B9F78','#920000'])
+    ax7.set_ylabel('NHE3=0', color='black', fontsize=12)
+    ax7.set_ylim(-0.2,8)
 
     plt.setp(plt.gca(), xticklabels=[])
     # ax7.legend(shadow=False, fancybox=False, frameon=False)
     ax8=fig.add_subplot(3, 3, 8)
-    ax8.bar(x2,my_loaded_list0['epithelial_flx_variation_nhe3'], color=['black', '#b66dff','#2B9F78'])
-    ax8.set_xlabel('Epithelial Flux_Na [mmol/s.cm2]', color='black')
+    ax8.bar(x2, [x * 1e6 for x in my_loaded_list0['epithelial_flx_variation_nhe3']], color=['black', '#b66dff','#2B9F78'])
+    ax8.set_xlabel(' Flux Type, Na+', color='black', fontsize=12)
     plt.setp(plt.gca(), xticklabels=[])
-    # ax8.set_ylim(-0.2,8.4)
+    ax8.set_ylim(-0.2,8)
     # ax8.legend(shadow=False, fancybox=False, frameon=False)
     # label=['ES', 'IE', 'IS', 'ME', 'MI','EPTL']
     ax9 = fig.add_subplot(3, 3, 9)
-    ax9.bar(x3, my_loaded_list0['epithelial_flx_elct_chmcl_nhe3'], color=['#db6d00', '#b66dff', '#2B9F78'])
+    ax9.bar(x3, [x * 1e6 for x in my_loaded_list0['epithelial_flx_elct_chmcl_nhe3']], color=['#db6d00', '#b66dff', '#2B9F78'])
     plt.setp(plt.gca(), xticklabels=[])
-    ax9.set_xlabel('Electrochemical Flux_Na [mmol/s.cm2]', color='black')
-    # ax9.set_ylim(-0.1,3.8)
+
+    ax9.set_ylim(-0.2,4)
     # ax9.legend(shadow=False, fancybox=False, frameon=False)
 
     for ax, color in zip([ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8, ax9], ['black', '#920000', '#2B9F78', 'black', '#920000', '#2B9F78', 'black', '#920000','#2B9F78']):
@@ -230,21 +237,21 @@ if Figure_6A:
     read_file = f.read()
     my_loaded_list0 = pickle.loads(read_file)
     f.close()
-    scale_factor = 1
+    scale_factor = 1e6
     flux_me = np.array(my_loaded_list0 [ 'fekm' ])
     flux_mi = np.array(my_loaded_list0 [ 'fikm' ])
     flux_is = np.array(my_loaded_list0 [ 'fiks' ])
     flux_ie = np.array(my_loaded_list0 [ 'fike' ])
     flux_es = np.array(my_loaded_list0 [ 'feks' ])
-    df1 = pd.DataFrame(scale_factor * flux_me, index=[ "Original Setup", "NaK = 0", "KCl = 0", "NaHCO3 = 0" ],
+    df1 = pd.DataFrame(scale_factor * flux_me, index=["(a) Original", "(b) NaK = 0", " (c) KCl = 0", "(d) NaHCO3 = 0"],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
-    df2 = pd.DataFrame(scale_factor * flux_is, index=[ "Original Setup", "NaK = 0", "KCl = 0", "NaHCO3 = 0" ],
+    df2 = pd.DataFrame(scale_factor * flux_is, index=["(a) Original", "(b) NaK = 0", " (c) KCl = 0", "(d) NaHCO3 = 0"],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
-    df3 = pd.DataFrame(scale_factor * flux_ie, index=[ "Original Setup", "NaK = 0", "KCl = 0", "NaHCO3 = 0" ],
+    df3 = pd.DataFrame(scale_factor * flux_ie, index=["(a) Original", "(b) NaK = 0", " (c) KCl = 0", "(d) NaHCO3 = 0"],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
-    df4 = pd.DataFrame(scale_factor * flux_es, index=[ "Original Setup", "NaK = 0", "KCl = 0", "NaHCO3 = 0" ],
+    df4 = pd.DataFrame(scale_factor * flux_es, index=["(a) Original", "(b) NaK = 0", " (c) KCl = 0", "(d) NaHCO3 = 0"],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
-    df5 = pd.DataFrame(scale_factor * flux_mi, index=[ "Original Setup", "NaK = 0", "KCl = 0", "NaHCO3 = 0" ],
+    df5 = pd.DataFrame(scale_factor * flux_mi, index=["(a) Original", "(b) NaK = 0", " (c) KCl = 0", "(d) NaHCO3 = 0"],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
     def prep_df(df, name):
         df = df.stack().reset_index()
@@ -265,12 +272,12 @@ if Figure_6A:
         alt.Y('sum(values)',
               axis=alt.Axis(
                   grid=False,
-                  title=None)),
+                  title="Membrane Fluxes [nmol/s.cm^2]")),
 
-        alt.Column('c1', title=None, sort=[ "Original Setup", "NaK = 0", "KCl = 0", "NaHCO3 = 0" ]),
+        alt.Column('c1', title=None, sort = ["(a) Original", "(b) NaK = 0", " (c) KCl = 0", "(d) NaHCO3 = 0"]),
         alt.Color('Fluxes',
                   scale=alt.Scale(
-                      range=[ 'black', '#D55E00', '#F0E442', '#007282', '#2B9F78' ]
+                      range=[ 'black', '#D55E00', '#F0E442', '#007282', '#2B9F78']
                   ),
                   )) \
         .configure_view(
@@ -284,12 +291,13 @@ if Figure_6B:
     read_file = f.read()
     my_loaded_list1 = pickle.loads(read_file)
     f.close()
-    Na = np.array(my_loaded_list1 [ 'Na' ])
-    K = np.array(my_loaded_list1 [ 'K' ])
-    Cl = np.array(my_loaded_list1 [ 'Cl' ])
-    Gluc = np.array(my_loaded_list1 [ 'Gluc' ])
+    scale_factor = 1e3
+    Na = scale_factor*np.array(my_loaded_list1 [ 'Na' ])
+    K = scale_factor*np.array(my_loaded_list1 [ 'K' ])
+    Cl = scale_factor*np.array(my_loaded_list1 [ 'Cl' ])
+    Gluc = scale_factor*np.array(my_loaded_list1 [ 'Gluc' ])
     df = pd.DataFrame({
-        'index': [ "A Original Setup", "B NaK = 0", "C KCl = 0", "D NaHCO3 = 0" ],
+        'index': [ "(a) Original", "(b) NaK = 0", "(c) KCl = 0", "(d) NaHCO3 = 0" ],
         'Na': Na,
         'K': K,
         'Cl': Cl,
@@ -297,7 +305,7 @@ if Figure_6B:
     })
     chart = alt.Chart(df.melt('index')).mark_bar().encode(
         alt.X('variable:N', axis=alt.Axis(title=''), sort=alt.Sort(None)),
-        alt.Y('value:Q', axis=alt.Axis(title='', grid=False)),
+        alt.Y('value:Q', axis=alt.Axis(title='Cellular Concentration [mmol/l]', grid=False)),
         column='index:N'
     ).configure_view(
     ).encode(
@@ -310,26 +318,26 @@ if Figure_8A:
     read_file = f.read()
     my_loaded_list0 = pickle.loads(read_file)
     f.close()
-    scale_factor = 1
-    flux_me = np.array(my_loaded_list0 [ 'fekm' ])
-    flux_mi = np.array(my_loaded_list0 [ 'fikm' ])
-    flux_is = np.array(my_loaded_list0 [ 'fiks' ])
-    flux_ie = np.array(my_loaded_list0 [ 'fike' ])
-    flux_es = np.array(my_loaded_list0 [ 'feks' ])
+    scale_factor = 1e6
+    flux_me = scale_factor*np.array(my_loaded_list0 [ 'fekm' ])
+    flux_mi = scale_factor*np.array(my_loaded_list0 [ 'fikm' ])
+    flux_is = scale_factor*np.array(my_loaded_list0 [ 'fiks' ])
+    flux_ie = scale_factor*np.array(my_loaded_list0 [ 'fike' ])
+    flux_es = scale_factor*np.array(my_loaded_list0 [ 'feks' ])
     df1 = pd.DataFrame(flux_me,
-                       index=[ "Original Setup", "NHE3 = 0", "SGLT = 0", "NaH2PO4 = 0" ],
+                       index=[ "(a) Original ", " (b) NHE3 = 0", "(c) SGLT = 0", "(d) NaH2PO4 = 0" ],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
     df2 = pd.DataFrame(flux_is,
-                       index=[ "Original Setup", "NHE3 = 0", "SGLT = 0", "NaH2PO4 = 0" ],
+                       index=[ "(a) Original ", " (b) NHE3 = 0", "(c) SGLT = 0", "(d) NaH2PO4 = 0" ],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
     df3 = pd.DataFrame(flux_ie,
-                       index=[ "Original Setup", "NHE3 = 0", "SGLT = 0", "NaH2PO4 = 0" ],
+                       index=["(a) Original ", " (b) NHE3 = 0", "(c) SGLT = 0", "(d) NaH2PO4 = 0" ],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
     df4 = pd.DataFrame(flux_es,
-                       index=[ "Original Setup", "NHE3 = 0", "SGLT = 0", "NaH2PO4 = 0" ],
+                       index=["(a) Original ", " (b) NHE3 = 0", "(c) SGLT = 0", "(d) NaH2PO4 = 0" ],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
     df5 = pd.DataFrame(flux_mi,
-                       index=[ "Original Setup", "NHE3 = 0", "SGLT = 0", "NaH2PO4 = 0" ],
+                       index=[ "(a) Original ", " (b) NHE3 = 0", "(c) SGLT = 0", "(d) NaH2PO4 = 0" ],
                        columns=[ "Na", "K", "Cl", "Gluc" ])
     def prep_df(df, name):
         df = df.stack().reset_index()
@@ -350,8 +358,8 @@ if Figure_8A:
         alt.Y('sum(values)',
               axis=alt.Axis(
                   grid=False,
-                  title=None)),
-        alt.Column('c1', title=None, sort=[ "Original Setup", "NHE3 = 0", "SGLT = 0", "NaH2PO4 = 0"]),
+                  title="Membrane Fluxes [nmol/s.cm^2]")),
+        alt.Column('c1', title=None, sort=[ "(a) Original ", " (b) NHE3 = 0", "(c) SGLT = 0", "(d) NaH2PO4 = 0" ]),
         alt.Color('Fluxes',
                   scale=alt.Scale(
                        range=[ 'black', '#D55E00', '#F0E442', '#007282', '#2B9F78']
@@ -369,14 +377,15 @@ if Figure_8B:
     my_loaded_list1 = pickle.loads(read_file)
 
     f.close()
+    scale_factor = 1e3
     print('my_loaded_list1', my_loaded_list1)
-    Na = np.array(my_loaded_list1 ['Na'])
-    K = np.array(my_loaded_list1 [ 'K'])
-    Cl = np.array(my_loaded_list1 [ 'Cl'])
-    Gluc = np.array(my_loaded_list1 ['Gluc'])
+    Na = scale_factor*np.array(my_loaded_list1 ['Na'])
+    K = scale_factor*np.array(my_loaded_list1 [ 'K'])
+    Cl = scale_factor*np.array(my_loaded_list1 [ 'Cl'])
+    Gluc = scale_factor*np.array(my_loaded_list1 ['Gluc'])
 
     df = pd.DataFrame({
-        'index': [ "A Original Setup", "B NHE3 = 0", "C SGLT = 0", "D NaH2PO4 = 0"],
+        'index': [ "(a) Original", "(b)) NHE3 = 0", "(c) SGLT = 0", "(d) NaH2PO4 = 0"],
         'Na': Na,
         'K': K,
         'Cl': Cl,
@@ -385,7 +394,7 @@ if Figure_8B:
 
     chart = alt.Chart(df.melt('index')).mark_bar().encode(
         alt.X('variable:N', axis=alt.Axis(title=''), sort=alt.Sort(None)),
-        alt.Y('value:Q', axis=alt.Axis(title='', grid=False)),
+        alt.Y('value:Q', axis=alt.Axis(title='Cellular Concentration [mmol/l]', grid=False)),
         column='index:N'
     ).configure_view(
     ).encode(
